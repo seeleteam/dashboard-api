@@ -9,6 +9,12 @@
 			"revisionTime": "2014-10-17T20:07:13Z"
 		},
 		{
+			"checksumSHA1": "eDQ6f1EsNf+frcRO/9XukSEchm8=",
+			"path": "github.com/satori/go.uuid",
+			"revision": "36e9d2ebbde5e3f13ab2e25625fd453271d6522e",
+			"revisionTime": "2018-01-03T17:44:51Z"
+		},
+		{
 			"checksumSHA1": "zIZZJkfCJx0+s6GCdenxvJrBTPM=",
 			"path": "github.com/spf13/cobra",
 			"revision": "ef82de70bb3f60c65fb8eebacbb2d122ef517385",

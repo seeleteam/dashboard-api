@@ -1,0 +1,27 @@
+{
+    "Name": "dashboard api",
+    "Version": "1.0",
+    "ListenAddr": "0.0.0.0:40404",
+    "LogLevel":"debug",
+    "DisableConsoleColor":true,
+    "PrintLog":true,
+    "WriteLog":true,
+    "HTTPCors": [
+      "*"
+    ],
+    "HTTPWhiteHost": [
+      "*"
+    ],
+    "EnableWebSocket":false,
+    "EnableGraceful":false,
+    "DefaultHammerTime":30,
+    "WebSocketURL":"/api",
+    "LimitConnection":0,
+    "RootRouterPrefix":"/api/v1",
+    "ServerConfig":{
+      "ReadTimeout":0,
+      "WriteTimeout":0,
+      "IdleTimeout":0,
+      "MaxHeaderBytes":1048576
+    }
+  }
