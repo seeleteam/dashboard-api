@@ -3,11 +3,11 @@
 
 all: release
 api:
-	go build -o ./build/api ./cmd/api
+	go build -o ./build/dashboard-api ./cmd/api
 	@echo "Done dashboard-api building debug"
 
 release:
-	go build -ldflags "-s -w" -o ./build/api ./cmd/api
+	go build -ldflags "-s -w" -o ./build/dashboard-api ./cmd/api
 	@echo "Done dashboard-api building release"
 
 .PHONY: api release
