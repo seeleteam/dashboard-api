@@ -11,32 +11,32 @@ import (
 
 func Test_GetConfigFromFile(t *testing.T) {
 	filepath := "./config/app.json"
-	config, err := GetConfigFromFile(filepath)
+	_, err := GetConfigFromFile(filepath)
 	if err != nil {
-		t.Fatalf("GetConfigFromFile %s %v", filepath, err)
+		t.Errorf("GetConfigFromFile %s %v", filepath, err)
 	}
 }
 
 func Test_GetConfigFromFileBad(t *testing.T) {
 	filepath := "./config/app-bad.json"
-	config, err := GetConfigFromFile(filepath)
+	_, err := GetConfigFromFile(filepath)
 	if err == nil {
-		t.Fatalf("GetConfigFromFile %s %v", filepath, err)
+		t.Errorf("GetConfigFromFile %s %v", filepath, err)
 	}
 }
 
 func Test_LoadConfigFromFile(t *testing.T) {
 	filepath := "./config/app.json"
-	config, err := LoadConfigFromFile(filepath)
+	_, err := LoadConfigFromFile(filepath)
 	if err != nil {
-		t.Fatalf("LoadConfigFromFile %s %v", filepath, err)
+		t.Errorf("LoadConfigFromFile %s %v", filepath, err)
 	}
 }
 
 func Test_LoadConfigFromFileBad(t *testing.T) {
 	filepath := "./config/app-bad.json"
-	config, err := LoadConfigFromFile(filepath)
+	_, err := LoadConfigFromFile(filepath)
 	if err == nil {
-		t.Fatalf("LoadConfigFromFile %s %v", filepath, err)
+		t.Errorf("LoadConfigFromFile %s %v", filepath, err)
 	}
 }
