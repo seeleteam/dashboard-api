@@ -1,7 +1,7 @@
 {
     "Name": "dashboard-api",
     "Version": "1.0",
-    "ListenAddr": "0.0.0.0:40404",
+    "ListenAddr": "0.0.0.0:61001",
     "LogLevel":"debug",
     "DisableConsoleColor":true,
     "PrintLog":true,
@@ -10,9 +10,9 @@
     "RunMode":"debug",
     "RootRouterPrefix":"/api",
     "ServerConfig":{
-      "ReadTimeout":0,
-      "WriteTimeout":0,
-      "IdleTimeout":0,
+      "ReadTimeout":60,
+      "WriteTimeout":60,
+      "IdleTimeout":120,
       "MaxHeaderBytes":1048576
     },
     "DB":{
@@ -20,8 +20,8 @@
       "Addr":"http://localhost:8086",
       "UserName":"test",
       "Password":"test123",
-      "DBInitialSize":0,
-      "DBMaxActive":0,
-      "DBIdleTimetout":0
+      "DBInitialSize":5,
+      "DBMaxActive":20,
+      "DBIdleTimetout":30
     }
   }

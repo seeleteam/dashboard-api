@@ -21,10 +21,10 @@ var (
 // startCmd represents the start command
 var startCmd = &cobra.Command{
 	Use:   "start",
-	Short: "start the api",
+	Short: "start the dashboard-api server",
 	Long: `usage example:
-		api.exe start -c cmd\app.json
-		start the api.`,
+	    dashboard-api.exe start -c cmd\app.json
+		start the dashboard-api.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
