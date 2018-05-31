@@ -14,7 +14,7 @@ import (
 
 // rootCmd represents the base command called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "api",
+	Use:   "dashboard-api",
 	Short: "api command for starting the dashboard-api",
 	Long:  `use "api help [<command>]" for detailed usage`,
 }
