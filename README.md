@@ -29,5 +29,8 @@ influxdb 1.5.1+
 
 ```shell
 cmd dashboard-api
+# generate the executable file
 make
+# execute the file
+build/dashboard-api start -c <configfile>
 ```
