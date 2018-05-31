@@ -1,0 +1,27 @@
+{
+    "Name": "dashboard-api",
+    "Version": "1.0",
+    "ListenAddr": "0.0.0.0:61001",
+    "LogLevel":"debug",
+    "DisableConsoleColor":true,
+    "PrintLog":true,
+    "WriteLog":true,
+    "LimitConnection":0,
+    "RunMode":"debug",
+    "RootRouterPrefix":"/api",
+    "ServerConfig":{
+      "ReadTimeout":60,
+      "WriteTimeout":60,
+      "IdleTimeout":120,
+      "MaxHeaderBytes":1048576
+    },
+    "DB":{
+      "Name":"influxdb",
+      "Addr":"http://localhost:8086",
+      "UserName":"test",
+      "Password":"test123",
+      "DBInitialSize":5,
+      "DBMaxActive":20,
+      "DBIdleTimetout":30
+    }
+  }

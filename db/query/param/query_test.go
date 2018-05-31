@@ -6,7 +6,6 @@
 package param
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/seeleteam/dashboard-api/query"
@@ -30,8 +29,7 @@ func Test_New(t *testing.T) {
 	}
 	query, err := New(condition)
 	if err != nil {
-		fmt.Printf("error %v", err)
+		t.Fatalf("error %v", err)
 		return
 	}
-	fmt.Printf("Query is\n%#v\n", query)
 }
