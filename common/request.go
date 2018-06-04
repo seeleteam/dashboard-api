@@ -12,7 +12,7 @@ package common
 *
  */
 const (
-	// RequestSelectFields columns without index in influxdb, if multi(array) separated by comma
+	// RequestFields columns without index in influxdb, if multi(array) separated by comma
 	RequestFields = "fields"
 
 	// RequestMeasurement table names in influxdb, if multi(array) separated by comma

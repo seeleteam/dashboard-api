@@ -35,5 +35,6 @@ func InitRouters(e *gin.Engine) {
 	apiSelectGroup := routerGroupAPI.Group("/query")
 	apiSelectGroup.GET("/sqls", handlers.SelectBySQLs())
 	apiSelectGroup.GET("/params", handlers.SelectWithParams())
+	apiSelectGroup.GET("/nodeInfo", handlers.SelectNodeInfo())
 
 }
