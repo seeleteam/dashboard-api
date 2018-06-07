@@ -198,7 +198,7 @@ func SelectNodeInfo() gin.HandlerFunc {
 		}
 		tableName := c.Query("measurement")
 		if tableName == "" {
-			tableName = "runtime.memory.allocs.gauge"
+			tableName = "runtime.memory.alloc.gauge"
 		}
 		group := c.Query("group")
 		if group == "" {
