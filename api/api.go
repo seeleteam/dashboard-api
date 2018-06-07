@@ -38,6 +38,5 @@ func New(conf *Config) (*API, error) {
 func (api *API) Start() error {
 	//run server with config and logs
 	server := GetServer(api)
-	server.Run()
-	return nil
+	return server.Run()
 }
