@@ -202,7 +202,7 @@ func SelectNodeInfo() gin.HandlerFunc {
 		}
 		group := c.Query("group")
 		if group == "" {
-			group = "coinbase,networkid,nodename"
+			group = "shardid,coinbase,networkid,nodename"
 		}
 
 		nodeInfoQuery := &param.Query{
