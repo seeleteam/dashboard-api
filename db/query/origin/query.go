@@ -15,13 +15,20 @@ import (
 
 // Query metrics query
 type Query struct {
-	Stmt string // query string
+	Stmt      string // query string
+	Precision string // h,m,s,ms,u,ns and ""
 }
 
 // New get Query for metrics by input sql
 func New(stmt string) *Query {
+	return NewWithPrecision(stmt, "")
+}
+
+// NewWithPrecision get Query for metrics by input sql and precision
+func NewWithPrecision(stmt string, precision string) *Query {
 	return &Query{
-		Stmt: stmt,
+		Stmt:      stmt,
+		Precision: precision,
 	}
 }
 
@@ -30,5 +37,5 @@ func (m *Query) Query() (res []client.Result, err error) {
 	if m.Stmt == "" {
 		return nil, errors.New("error query stmt")
 	}
-	return db.Query(m.Stmt)
+	return db.Query(m.Stmt, m.Precision)
 }

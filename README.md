@@ -34,3 +34,9 @@ make
 # execute the file
 build/dashboard-api start -c <configfile>
 ```
+
+## Tip
+
+The format column `time` in result series can be changed by parameter `precision`.
+
+Precision format like `rfc3339|h|m|s|ms|u|ns`

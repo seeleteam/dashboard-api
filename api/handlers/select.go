@@ -54,8 +54,10 @@ func SelectBySQLs() gin.HandlerFunc {
 			return
 		}
 
-		query := origin.New(sqlStr.String())
-		log.Debug("stmt: %v", query.Stmt)
+		precision := c.Query(common.RequestPrecision)
+
+		query := origin.NewWithPrecision(sqlStr.String(), precision)
+		log.Debug("stmt: %v, precision: %v\n", query.Stmt, precision)
 
 		res, err := query.Query()
 		if err != nil {
@@ -167,7 +169,9 @@ func SelectWithParams() gin.HandlerFunc {
 			TimeZone:         timeZone,
 		}
 
-		paramQuery, err := param.New(condition)
+		precision := c.Query(common.RequestPrecision)
+
+		paramQuery, err := param.NewWithPrecision(condition, precision)
 		if err != nil {
 			log.Error("%v", err)
 			responseData := common.NewResponseData(500, err, nil, c.Request.RequestURI)
@@ -175,7 +179,7 @@ func SelectWithParams() gin.HandlerFunc {
 			return
 		}
 
-		log.Debug("stmt: %v\n", paramQuery.Stmt)
+		log.Debug("stmt: %v, precision: %v\n", paramQuery.Stmt, precision)
 
 		res, err := paramQuery.Query()
 		if err != nil {
@@ -205,11 +209,14 @@ func SelectNodeInfo() gin.HandlerFunc {
 			group = "shardid,coinbase,networkid,nodename"
 		}
 
+		precision := c.Query(common.RequestPrecision)
+
 		nodeInfoQuery := &param.Query{
-			Stmt: fmt.Sprintf("select %s from \"%s\" group by %s fill(null)", field, tableName, group),
+			Stmt:      fmt.Sprintf("select %s from \"%s\" group by %s fill(null)", field, tableName, group),
+			Precision: precision,
 		}
 
-		log.Debug("stmt: %v\n", nodeInfoQuery)
+		log.Debug("stmt: %v, precision: %v\n", nodeInfoQuery, precision)
 
 		res, err := nodeInfoQuery.Query()
 		if err != nil {
