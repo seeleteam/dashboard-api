@@ -6,6 +6,7 @@
 package api
 
 import (
+	"errors"
 	"net/http"
 
 	"golang.org/x/sync/errgroup"
@@ -51,19 +52,20 @@ func GetServer(api *API) (server *Server) {
 }
 
 // Run start the server
-func (server *Server) Run() {
+func (server *Server) Run() error {
 	// run http server
 	server.runServer()
 	if server.config.EnableHTTPS {
 		if server.config.CertFile == "" || server.config.KeyFile == "" {
-			return
+			return errors.New("use https should config the cert and key files")
 		}
-		//TODO if certFIle or keyFile not exist runServer
 		server.runServerTLS()
 	}
 	if err := server.G.Wait(); err != nil {
 		server.API.log.Fatalln(err)
+		return err
 	}
+	return nil
 }
 
 // runServer run our server in a goroutine so that it doesn't block.

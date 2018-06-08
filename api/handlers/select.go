@@ -54,8 +54,10 @@ func SelectBySQLs() gin.HandlerFunc {
 			return
 		}
 
-		query := origin.New(sqlStr.String())
-		log.Debug("stmt: %v", query.Stmt)
+		precision := c.Query(common.RequestPrecision)
+
+		query := origin.NewWithPrecision(sqlStr.String(), precision)
+		log.Debug("stmt: %v, precision: %v\n", query.Stmt, precision)
 
 		res, err := query.Query()
 		if err != nil {
@@ -167,7 +169,9 @@ func SelectWithParams() gin.HandlerFunc {
 			TimeZone:         timeZone,
 		}
 
-		paramQuery, err := param.New(condition)
+		precision := c.Query(common.RequestPrecision)
+
+		paramQuery, err := param.NewWithPrecision(condition, precision)
 		if err != nil {
 			log.Error("%v", err)
 			responseData := common.NewResponseData(500, err, nil, c.Request.RequestURI)
@@ -175,7 +179,7 @@ func SelectWithParams() gin.HandlerFunc {
 			return
 		}
 
-		log.Debug("stmt: %v\n", paramQuery.Stmt)
+		log.Debug("stmt: %v, precision: %v\n", paramQuery.Stmt, precision)
 
 		res, err := paramQuery.Query()
 		if err != nil {
@@ -185,6 +189,53 @@ func SelectWithParams() gin.HandlerFunc {
 			return
 		}
 		responseData := common.NewResponseData(200, err, res, c.Request.RequestURI)
+		ResponseJSON(c, responseData)
+	}
+}
+
+// SelectNodeInfo select node info with params(generate sql)
+func SelectNodeInfo() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		field := c.Query("field")
+		if field == "" {
+			field = "last(value)"
+		}
+		tableName := c.Query("measurement")
+		if tableName == "" {
+			tableName = "runtime.memory.alloc.gauge"
+		}
+		group := c.Query("group")
+		if group == "" {
+			group = "shardid,coinbase,networkid,nodename"
+		}
+
+		precision := c.Query(common.RequestPrecision)
+
+		nodeInfoQuery := &param.Query{
+			Stmt:      fmt.Sprintf("select %s from \"%s\" group by %s fill(null)", field, tableName, group),
+			Precision: precision,
+		}
+
+		log.Debug("stmt: %v, precision: %v\n", nodeInfoQuery, precision)
+
+		res, err := nodeInfoQuery.Query()
+		if err != nil {
+			log.Error("%v", err)
+			responseData := common.NewResponseData(500, err, nil, c.Request.RequestURI)
+			ResponseJSON(c, responseData)
+			return
+		}
+
+		var nodeInfo []map[string]string
+
+		for _, result := range res {
+			nodeInfo = make([]map[string]string, 0)
+			for _, series := range result.Series {
+				nodeInfo = append(nodeInfo, series.Tags)
+			}
+		}
+
+		responseData := common.NewResponseData(200, err, &nodeInfo, c.Request.RequestURI)
 		ResponseJSON(c, responseData)
 	}
 }

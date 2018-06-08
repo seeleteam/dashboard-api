@@ -12,7 +12,7 @@ package common
 *
  */
 const (
-	// RequestSelectFields columns without index in influxdb, if multi(array) separated by comma
+	// RequestFields columns without index in influxdb, if multi(array) separated by comma
 	RequestFields = "fields"
 
 	// RequestMeasurement table names in influxdb, if multi(array) separated by comma
@@ -199,4 +199,9 @@ const (
 
 	// RequestSQL the sql or sql array field in request
 	RequestSQL = "sql"
+
+	// RequestPrecision Specifies the format/precision of the timestamp: rfc3339 (YYYY-MM-DDTHH:MM:SS.nnnnnnnnnZ),
+	// h (hours), m (minutes), s (seconds), ms (milliseconds), u (microseconds), ns (nanoseconds).
+	// Precision defaults to nanoseconds.
+	RequestPrecision = "precision"
 )

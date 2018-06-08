@@ -40,10 +40,9 @@ var startCmd = &cobra.Command{
 			return
 		}
 		if err := apiServer.Start(); err != nil {
-			fmt.Println(err.Error())
+			fmt.Printf("api server run failed %v", err.Error())
 			return
 		}
-
 		wg.Add(1)
 		wg.Wait()
 	},

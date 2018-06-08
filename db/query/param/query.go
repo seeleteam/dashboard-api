@@ -25,17 +25,24 @@ const (
 
 // Query metrics query with params
 type Query struct {
-	Stmt string
+	Stmt      string
+	Precision string // h,m,s,ms,u,ns and ""
 }
 
 // New get Query for metrics by input params
 func New(cond *db.Condition) (*Query, error) {
+	return NewWithPrecision(cond, "")
+}
+
+// NewWithPrecision get Query for metrics by input sql and precision
+func NewWithPrecision(cond *db.Condition, precision string) (*Query, error) {
 	stmt, err := generateQueryStmt(cond)
 	if err != nil {
 		return nil, err
 	}
 	return &Query{
-		Stmt: stmt,
+		Stmt:      stmt,
+		Precision: precision,
 	}, nil
 }
 
@@ -44,7 +51,7 @@ func (m *Query) Query() (res []client.Result, err error) {
 	if m.Stmt == "" {
 		return nil, errors.New("error query stmt")
 	}
-	return db.Query(m.Stmt)
+	return db.Query(m.Stmt, m.Precision)
 }
 
 // generateQueryStmt generate query string with input params
