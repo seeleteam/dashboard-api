@@ -3,10 +3,78 @@
 	"ignore": "test",
 	"package": [
 		{
+			"path": "github.com/aviddiviner/gin-limit",
+			"revision": ""
+		},
+		{
 			"checksumSHA1": "V6gJx3kala+tjfo/ynTjg1u5OxI=",
 			"path": "github.com/gin-contrib/cors",
 			"revision": "6f0a820f94bea07359ec77c26855ca8cf6762739",
 			"revisionTime": "2018-05-14T15:18:08Z"
+		},
+		{
+			"path": "github.com/gin-contrib/sse",
+			"revision": ""
+		},
+		{
+			"path": "github.com/gin-gonic/gin",
+			"revision": ""
+		},
+		{
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": ""
+		},
+		{
+			"path": "github.com/gin-gonic/gin/json",
+			"revision": ""
+		},
+		{
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": ""
+		},
+		{
+			"path": "github.com/golang/protobuf/proto",
+			"revision": ""
+		},
+		{
+			"path": "github.com/influxdata/influxdb/client/v2",
+			"revision": ""
+		},
+		{
+			"path": "github.com/influxdata/influxdb/models",
+			"revision": ""
+		},
+		{
+			"path": "github.com/influxdata/influxdb/pkg/escape",
+			"revision": ""
+		},
+		{
+			"path": "github.com/lestrrat-go/file-rotatelogs",
+			"revision": ""
+		},
+		{
+			"path": "github.com/lestrrat-go/file-rotatelogs/internal/option",
+			"revision": ""
+		},
+		{
+			"path": "github.com/lestrrat-go/strftime",
+			"revision": ""
+		},
+		{
+			"path": "github.com/mattn/go-isatty",
+			"revision": ""
+		},
+		{
+			"path": "github.com/pkg/errors",
+			"revision": ""
+		},
+		{
+			"path": "github.com/rifflock/lfshook",
+			"revision": ""
+		},
+		{
+			"path": "github.com/sirupsen/logrus",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "zIZZJkfCJx0+s6GCdenxvJrBTPM=",
@@ -19,6 +87,50 @@
 			"path": "github.com/spf13/pflag",
 			"revision": "583c0c0531f06d5278b7d917446061adc344b5cd",
 			"revisionTime": "2018-04-12T12:09:13Z"
+		},
+		{
+			"path": "github.com/ugorji/go/codec",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "BGm8lKZmvJbf/YOJLeL1rw2WVjA=",
+			"path": "golang.org/x/crypto/ssh/terminal",
+			"revision": "a49355c7e3f8fe157a85be2f77e6e269a0f89602",
+			"revisionTime": "2018-06-20T09:14:27Z"
+		},
+		{
+			"checksumSHA1": "GtamqiJoL7PGHsN454AoffBFMa8=",
+			"path": "golang.org/x/net/context",
+			"revision": "afe8f62b1d6bbd81f31868121a50b06d8188e1f9",
+			"revisionTime": "2018-06-20T20:20:43Z"
+		},
+		{
+			"checksumSHA1": "S0DP7Pn7sZUmXc55IzZnNvERu6s=",
+			"path": "golang.org/x/sync/errgroup",
+			"revision": "1d60e4601c6fd243af51cc01ddf169918a5407ca",
+			"revisionTime": "2018-03-14T17:21:19Z"
+		},
+		{
+			"checksumSHA1": "z2j2TvY7Vf7Ux1y9d6eUrKicbGs=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "63fc586f45fe72d95d5240a5d5eb95e6503907d3",
+			"revisionTime": "2018-06-21T12:21:10Z"
+		},
+		{
+			"checksumSHA1": "zc2NI38L40/N4+pjd9P2ESz68/0=",
+			"path": "golang.org/x/sys/windows",
+			"revision": "63fc586f45fe72d95d5240a5d5eb95e6503907d3",
+			"revisionTime": "2018-06-21T12:21:10Z"
+		},
+		{
+			"checksumSHA1": "P/k5ZGf0lEBgpKgkwy++F7K1PSg=",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "5f1438d3fca68893a817e4a66806cea46a9e4ebf",
+			"revisionTime": "2017-07-30T05:02:35Z"
+		},
+		{
+			"path": "gopkg.in/yaml.v2",
+			"revision": ""
 		}
 	],
 	"rootPath": "github.com/seeleteam/dashboard-api"
