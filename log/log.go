@@ -8,6 +8,7 @@ package log
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
@@ -20,9 +21,12 @@ import (
 )
 
 const (
-	defaultLogDir      = "dashboard-api-logs"
 	defaultLogFilePrex = ""
 	defaultLogFile     = "all.logs"
+)
+
+var (
+	defaultLogDir = "dashboard-api-logs"
 )
 
 // GlobalLog struct
@@ -139,6 +143,7 @@ func GetLoggerWithOptions(logName string, options *Options) *GlobalLog {
 	writeLog := common.WriteLog
 	depth := common.LogDepth
 	withCallerHook := common.WithCallerHook
+	tempFolder := common.TempFolder
 
 	// options set
 	cpOptions := *options
@@ -163,17 +168,19 @@ func GetLoggerWithOptions(logName string, options *Options) *GlobalLog {
 	log.SetLevel(logLevel)
 
 	if writeLog {
-		err := os.MkdirAll(defaultLogDir, os.ModePerm)
+		storeLogDir := filepath.Join(tempFolder, defaultLogDir)
+
+		err := os.MkdirAll(storeLogDir, os.ModePerm)
 		if err != nil {
 			panic(fmt.Sprintf("creating log file failed: %s", err.Error()))
 		}
 
-		path := defaultLogDir + string(os.PathSeparator) + defaultLogFile
+		path := filepath.Join(storeLogDir, defaultLogFile)
 		writer, err := rotatelogs.New(
 			path+".%Y%m%d%H%M%S",
 			rotatelogs.WithLinkName(path),
-			rotatelogs.WithMaxAge(time.Duration(60*60*24*7)*time.Second),  // 24 hours
-			rotatelogs.WithRotationTime(time.Duration(86400)*time.Second), // 1 days
+			rotatelogs.WithMaxAge(time.Duration(24*7)*time.Hour),
+			rotatelogs.WithRotationTime(time.Duration(24)*time.Hour),
 		)
 		if err != nil {
 			panic(fmt.Sprintf("rotatelogs log failed: %s", err.Error()))
@@ -191,11 +198,11 @@ func GetLoggerWithOptions(logName string, options *Options) *GlobalLog {
 		))
 
 		pathMap := lfshook.PathMap{
-			logrus.DebugLevel: fmt.Sprintf("%s/%sdebug.log", defaultLogDir, defaultLogFilePrex),
-			logrus.InfoLevel:  fmt.Sprintf("%s/%sinfo.log", defaultLogDir, defaultLogFilePrex),
-			logrus.WarnLevel:  fmt.Sprintf("%s/%swarn.log", defaultLogDir, defaultLogFilePrex),
-			logrus.ErrorLevel: fmt.Sprintf("%s/%serror.log", defaultLogDir, defaultLogFilePrex),
-			logrus.FatalLevel: fmt.Sprintf("%s/%sfatal.log", defaultLogDir, defaultLogFilePrex),
+			logrus.DebugLevel: fmt.Sprintf("%s/%sdebug.log", storeLogDir, defaultLogFilePrex),
+			logrus.InfoLevel:  fmt.Sprintf("%s/%sinfo.log", storeLogDir, defaultLogFilePrex),
+			logrus.WarnLevel:  fmt.Sprintf("%s/%swarn.log", storeLogDir, defaultLogFilePrex),
+			logrus.ErrorLevel: fmt.Sprintf("%s/%serror.log", storeLogDir, defaultLogFilePrex),
+			logrus.FatalLevel: fmt.Sprintf("%s/%sfatal.log", storeLogDir, defaultLogFilePrex),
 		}
 		log.AddHook(lfshook.NewHook(
 			pathMap,

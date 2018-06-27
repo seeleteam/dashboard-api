@@ -8,6 +8,7 @@ package cmd
 import (
 	"encoding/json"
 	"io/ioutil"
+	"os"
 
 	"github.com/gin-gonic/gin"
 
@@ -30,6 +31,9 @@ type Config struct {
 	// If PrintLog is true, all logs will be printed in the console, otherwise they will be stored in the file.
 	PrintLog bool
 
+	// TempFolder used to store temp file, such as log files
+	TempFolder string
+
 	WriteLog bool
 
 	LogDepth int
@@ -47,6 +51,15 @@ func GetConfigFromFile(filepath string) (Config, error) {
 	return config, err
 }
 
+// IsDir judge the path is dir
+func IsDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
 // LoadConfigFromFile gets node config from the given file
 func LoadConfigFromFile(configFile string) (*api.Config, error) {
 	config, err := GetConfigFromFile(configFile)
@@ -57,6 +70,9 @@ func LoadConfigFromFile(configFile string) (*api.Config, error) {
 	// common config
 	common.DisableConsoleColor = config.DisableConsoleColor
 	common.LogLevel = config.LogLevel
+	if IsDir(config.TempFolder) {
+		common.TempFolder = config.TempFolder
+	}
 	common.PrintLog = config.PrintLog
 	common.RootRouterPrefix = config.RootRouterPrefix
 	common.WriteLog = config.WriteLog
