@@ -15,6 +15,7 @@
       "IdleTimeout":120,
       "MaxHeaderBytes":1048576
     },
+    "TempFolder":"/tmp",
     "DB":{
       "Name":"influxdb",
       "Addr":"http://localhost:8086",

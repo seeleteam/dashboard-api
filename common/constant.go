@@ -5,9 +5,14 @@
 
 package common
 
+import (
+	"os"
+	"path/filepath"
+)
+
 var (
-	// tempFolder used to store temp file, such as log files
-	tempFolder string
+	// TempFolder used to store temp file, such as log files
+	TempFolder string
 
 	// defaultDataFolder used to store persistent data info, such as the database and keystore
 	defaultDataFolder string
@@ -32,3 +37,7 @@ var (
 	// LogLevel default is debug. If LogLevel is correct set, the log level will be use the value LogLevel, otherwise it will use the default LogLevel
 	LogLevel = "debug"
 )
+
+func init() {
+	TempFolder = filepath.Join(os.TempDir(), "dashboardAPITemp")
+}
