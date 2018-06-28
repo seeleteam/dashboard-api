@@ -11,6 +11,7 @@ import (
 
 	limit "github.com/aviddiviner/gin-limit"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 
 	"github.com/seeleteam/dashboard-api/api/routers"
@@ -37,6 +38,8 @@ func (config *EngineConfig) initEngineConfig() *gin.Engine {
 	gin.SetMode(config.RunMode)
 
 	e := gin.New()
+
+	e.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	// gin api handlers, used for api log info
 	e.Use(log.Logger(log.GetLoggerWithCaller("gin-handlers", true, false).GetLogger()))

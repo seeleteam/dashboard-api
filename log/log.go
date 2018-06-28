@@ -178,7 +178,7 @@ func GetLoggerWithOptions(logName string, options *Options) *GlobalLog {
 		path := filepath.Join(storeLogDir, defaultLogFile)
 		writer, err := rotatelogs.New(
 			path+".%Y%m%d%H%M%S",
-			rotatelogs.WithLinkName(path),
+			rotatelogs.WithClock(rotatelogs.Local),
 			rotatelogs.WithMaxAge(time.Duration(24*7)*time.Hour),
 			rotatelogs.WithRotationTime(time.Duration(24)*time.Hour),
 		)

@@ -25,6 +25,7 @@ func queryDBWithParameters(clnt client.Client, cmd, precision string, parameters
 		Precision:  precision,
 		Parameters: parameters,
 	}
+	defer CloseConn(clnt)
 	if response, err := clnt.Query(q); err == nil {
 		if response.Error() != nil {
 			return res, response.Error()
@@ -39,6 +40,5 @@ func queryDBWithParameters(clnt client.Client, cmd, precision string, parameters
 // Query with query and precision string
 func Query(cmd string, precision string) (res []client.Result, err error) {
 	client := GetConn()
-	defer CloseConn(client)
 	return queryDB(client, cmd, precision)
 }
