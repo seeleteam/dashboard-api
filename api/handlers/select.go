@@ -66,8 +66,10 @@ func SelectBySQLs() gin.HandlerFunc {
 			ResponseJSON(c, responseData)
 			return
 		}
+		res = nil
 		responseData := common.NewResponseData(200, nil, res, c.Request.RequestURI)
 		ResponseJSON(c, responseData)
+		responseData = nil
 	}
 }
 
@@ -188,8 +190,11 @@ func SelectWithParams() gin.HandlerFunc {
 			ResponseJSON(c, responseData)
 			return
 		}
+
+		res = nil
 		responseData := common.NewResponseData(200, err, res, c.Request.RequestURI)
 		ResponseJSON(c, responseData)
+		responseData = nil
 	}
 }
 
@@ -235,7 +240,9 @@ func SelectNodeInfo() gin.HandlerFunc {
 			}
 		}
 
+		res = nil
 		responseData := common.NewResponseData(200, err, &nodeInfo, c.Request.RequestURI)
 		ResponseJSON(c, responseData)
+		responseData = nil
 	}
 }

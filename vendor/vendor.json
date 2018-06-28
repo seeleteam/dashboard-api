@@ -13,6 +13,12 @@
 			"revisionTime": "2018-05-14T15:18:08Z"
 		},
 		{
+			"checksumSHA1": "63MPpk/DUPDrjnyi72Y8IuuIEH8=",
+			"path": "github.com/gin-contrib/gzip",
+			"revision": "4fbfcc6122759afed2efbc762c4c41164a403951",
+			"revisionTime": "2018-02-25T15:48:13Z"
+		},
+		{
 			"path": "github.com/gin-contrib/sse",
 			"revision": ""
 		},
